@@ -1,6 +1,5 @@
 import { WechatyBuilder } from 'wechaty';
 import qrcodeTerminal from "qrcode-terminal";
-import config from '../config/index.js';
 
 export default class BindWeChat {
 
@@ -63,19 +62,19 @@ export default class BindWeChat {
 
     if(room) {
       const groupTopic = (room.topic && await room.topic()) || "";
-      const isAllowActiveGroup = !config.GROUP_CHAT_MATCH_TOPIC_LIST?.length || (config.GROUP_CHAT_MATCH_TOPIC_LIST.includes(groupTopic))
+      const isAllowActiveGroup = !process.env.GROUP_CHAT_MATCH_TOPIC_LIST?.length || (process.env.GROUP_CHAT_MATCH_TOPIC_LIST.includes(groupTopic))
       if(
         isAllowActiveGroup &&
         (
-          (config.GROUP_IS_MENTION_MTACH && await msg.mentionSelf()) || 
-          (config.GROUP_CHAT_MATCH_KEY && RegExp(`^${config.GROUP_CHAT_MATCH_KEY}`).test(content))
+          (process.env.GROUP_IS_MENTION_MTACH && await msg.mentionSelf()) || 
+          (process.env.GROUP_CHAT_MATCH_KEY && RegExp(`^${process.env.GROUP_CHAT_MATCH_KEY}`).test(content))
         )
       ) {
-        const pattern = RegExp(`^${config.GROUP_CHAT_MATCH_KEY}`);
+        const pattern = RegExp(`^${process.env.GROUP_CHAT_MATCH_KEY}`);
         this.handleReplyMessage(room, content.replace(pattern, ''), { userName, isGroup: true });
       }
     }else {
-      const pattern = RegExp(`^${config.SIGLE_CHAT_MATCH_KEY}`);
+      const pattern = RegExp(`^${process.env.SIGLE_CHAT_MATCH_KEY}`);
       if(pattern.test(content)) {
         this.handleReplyMessage(contact, content.replace(pattern, ''), { userName });
       }

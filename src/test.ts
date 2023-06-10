@@ -1,5 +1,8 @@
 import inquirer from 'inquirer';
 import ChatGpt from './lib/chatgpt.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 test();
 

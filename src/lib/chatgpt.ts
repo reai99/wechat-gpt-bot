@@ -1,5 +1,4 @@
 import { ChatGPTClient } from '@waylaidwanderer/chatgpt-api';
-import config from '../config/index.js';
 
 const clientOptions = {
   modelOptions: {
@@ -39,10 +38,10 @@ export default class ChatGpt {
 
   constructor() {
     this.chatGPT = new ChatGPTClient(
-      config.OPEN_AI_API_KEY,
+      process.env.OPEN_AI_API_KEY,
       {
         ...clientOptions,
-        reverseProxyUrl: config.REVERSE_PROXY_URL,
+        reverseProxyUrl: process.env.REVERSE_PROXY_URL,
       },
       cacheOptions
     );
