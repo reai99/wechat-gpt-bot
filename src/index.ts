@@ -1,8 +1,10 @@
 import ChatGpt from "./lib/chatgpt.js";
 import BindWeChat from './lib/wechat.js';
 import config from "./config/index.js";
+import prompt from "./prompt/index.js";
 
 let chatGptClient: any = null;
+const CONCAT_IS_INIT_PROMPT_MAP = {};
 
 function initProcess() {
  // 初始化ChatGpt 
@@ -11,10 +13,25 @@ function initProcess() {
  new BindWeChat({}, replyMessage);
 }
 
+const initPrompt = async (id: any) => {
+  for(let i = 0, len = prompt.length; i< len; i++) {
+    await chatGptClient.sendMessageToChatGpt(prompt[i], { id });
+  }
+}
+
 const replyMessage = async (concat: any, content: string, options: any) => {
   const { id } = concat;
+  
+   // 初始化prompt
+  if(!CONCAT_IS_INIT_PROMPT_MAP[id]) {
+    CONCAT_IS_INIT_PROMPT_MAP[id] = 1;
+    await initPrompt(id);
+  }
+
   const question = content.trim();
+
   console.log('问题:', question)
+
   let reply = await chatGptClient.sendMessageToChatGpt(question, { id });
 
   // 增加回复前缀
