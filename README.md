@@ -15,6 +15,7 @@
 
 ##### 一键部署
 支持快速一键部署，只要准备好自己的OPEN_AI_KEY即可
+
  [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/fo7Gyc?referralCode=_XyUDD)
 
 
