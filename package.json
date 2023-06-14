@@ -7,6 +7,9 @@
     "test": "node --loader ts-node/esm --inspect ./src/test.ts",
     "server": "node  --loader ts-node/esm --inspect ./src/server.ts"
   },
+   "engines": {
+    "node": ">=16.0.0"
+  },
   "keywords": [
     "chatgpt",
     "wechat"
