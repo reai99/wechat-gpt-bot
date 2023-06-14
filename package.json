@@ -7,7 +7,7 @@
     "test": "node --loader ts-node/esm --inspect ./src/test.ts",
     "server": "node  --loader ts-node/esm --inspect ./src/server.ts"
   },
-   "engines": {
+  "engines": {
     "node": ">=16.0.0"
   },
   "keywords": [
@@ -22,6 +22,7 @@
     "inquirer": "^9.2.7",
     "koa": "^2.14.2",
     "koa-router": "^12.0.0",
+    "koa2-cors": "^2.0.6",
     "qrcode-terminal": "^0.12.0",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.1",
